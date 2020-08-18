@@ -8,6 +8,10 @@ const userRoutes = (app) => {
     let response = await userController.createUser(req.body);
     res.send(response);
   });
+  app.put("/updateUser", async (req, res) => {
+    let response = await userController.updateUser(req.body);
+    res.send(response);
+  });
   app.delete("/deleteUser", async (req, res) => {
     const id = req.query.ID;
     let response = await userController.deleteUser(id);

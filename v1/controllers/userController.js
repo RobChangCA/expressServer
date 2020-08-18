@@ -14,6 +14,11 @@ const usersController = {
     const query = `DELETE FROM users WHERE ID = ${id}`;
     return await queryHelper(query);
   },
+  updateUser: async (user) => {
+    const { firstName, lastName, id } = user;
+    query = `UPDATE users SET FirstName = "${firstName}", LastName = "${lastName}" WHERE ID = ${id}`;
+    return await queryHelper(query);
+  },
 };
 
 module.exports = usersController;
