@@ -1,14 +1,17 @@
 const userController = require("../controllers/userController.js");
 const userRoutes = (app) => {
   app.get("/getUsers", async (req, res) => {
-    try {
-      await userController.getUsers(res).then((result, callback) => {
-        console.log("result callback", callback);
-        console.log("result route", result);
-      });
-    } catch (err) {
-      console.log("this is err from routes", err);
-    }
+    let response = await userController.getUsers();
+    res.send(response);
+  });
+  app.post("/createUser", async (req, res) => {
+    let response = await userController.createUser(req.body);
+    res.send(response);
+  });
+  app.delete("/deleteUser", async (req, res) => {
+    const id = req.query.ID;
+    let response = await userController.deleteUser(id);
+    res.send(response);
   });
 };
 

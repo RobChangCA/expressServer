@@ -1,7 +1,13 @@
 const dbConnection = require("../../config/dbConnect");
-const queryHelper = async (app, query) => {
-  const myQuery = await dbConnection.query(query, async (err, response) => {
-    return app.send(response);
+const queryHelper = async (query) => {
+  let data;
+  await new Promise((resolve, reject) => {
+    dbConnection.query(query, (err, response) => {
+      if (err) console.log(err);
+      data = response;
+      resolve();
+    });
   });
+  return data;
 };
 module.exports = queryHelper;
